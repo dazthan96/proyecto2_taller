@@ -1,5 +1,5 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Obra } from "./obra.entity.js";
+import { Obra } from "../obras/entities/obra.entity.js";
 
 @Entity('region')
 export class Region{

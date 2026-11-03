@@ -1,9 +1,10 @@
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import type {Relation } from "typeorm";
 import { Obra } from "../../obras/entities/obra.entity.js";
 
 @Entity('usuario')
 export class Usuario {
-    @PrimaryGeneratedColumn()
+    @PrimaryColumn()
     id: number;
 
     @Column({ unique: true })
@@ -15,15 +16,15 @@ export class Usuario {
     @Column()
     nombre_completo: string;
 
-    @Column({ type: 'enum', enum: ['ADMINISTRADOR', 'EDITOR'] })
+    @Column({ type: 'enum', enum: ['admin', 'editor', 'visitante'] })
     rol: string;
 
-    @Column({ default: true })
-    esta_activo: boolean;
+    @DeleteDateColumn()
+    eliminado_en:Date;
 
     @CreateDateColumn()
     creado_en: Date;
 
     @OneToMany(() => Obra, (obra) => obra.usuario)
-    obraCreados: Obra[];
+    obraCreados: Relation<Obra[]>;
 }

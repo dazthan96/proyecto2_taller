@@ -1,26 +1,42 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateAutoreDto } from './dto/create-autore.dto.js';
 import { UpdateAutoreDto } from './dto/update-autore.dto.js';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Autore } from './entities/autore.entity.js';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class AutoresService {
-  create(createAutoreDto: CreateAutoreDto) {
-    return 'This action adds a new autore';
+  constructor(
+    @InjectRepository(Autore)
+    private readonly autorRepo:Repository<Autore>,
+  ){}
+  async create(createAutoreDto: CreateAutoreDto) {
+    const autor =  this.autorRepo.create(createAutoreDto);
+    return await this.autorRepo.save(autor);
   }
 
-  findAll() {
-    return `This action returns all autores`;
+  async findAll() {
+    return await this.autorRepo.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} autore`;
+  async findOne(id: number) {
+    const autor = await this.autorRepo.findOne({
+      where:{id:id}
+    })
+    if(!autor){throw new NotFoundException("El autor no existe")}
+    return autor;
   }
 
-  update(id: number, updateAutoreDto: UpdateAutoreDto) {
-    return `This action updates a #${id} autore`;
+  async update(id: number, updateAutoreDto: UpdateAutoreDto) {
+    const autor = await this.autorRepo.findOneBy({id:id})
+    if(!autor){throw new NotFoundException("Autor no encontrado")}
+    return await this.autorRepo.update(id, updateAutoreDto)
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} autore`;
+  async remove(id: number) {
+    const autor = await this.autorRepo.findOneBy({id:id})
+    if(!autor){throw new NotFoundException("Autor no encontrado")}
+    return await this.autorRepo.softDelete(id)
   }
 }

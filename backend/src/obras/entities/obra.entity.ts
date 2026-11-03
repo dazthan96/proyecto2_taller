@@ -1,11 +1,12 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Departamento } from "./departamento.entity.js";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import type {Relation } from "typeorm";
+import { Departamento } from "../../entidades/departamento.entity.js";
 import { Autore } from "../../autores/entities/autore.entity.js";
-import { Region } from "./region.entity.js";
-import { Cultura } from "./cultura.entity.js";
-import { Categoria } from "./categoria.entity.js";
+import { Region } from "../../entidades/region.entity.js";
+import { Cultura } from "../../entidades/cultura.entity.js";
+import { Categoria } from "../../entidades/categoria.entity.js";
 import { Usuario } from "../../usuarios/entities/usuario.entity.js";
-
+import { ManyToManySubjectBuilder } from "typeorm/persistence/subject-builder/ManyToManySubjectBuilder.js";
 @Entity('obra')
 export class Obra {
     @PrimaryGeneratedColumn()
@@ -28,6 +29,9 @@ export class Obra {
 
     @CreateDateColumn()
     creado_en: Date
+    
+    @DeleteDateColumn()
+    eliminado_en:Date
 
     @ManyToOne(()=>Departamento, (departamento)=>departamento.obras, {eager:true})
     @JoinColumn({name: 'departamento_id'})
@@ -35,7 +39,7 @@ export class Obra {
 
     @ManyToOne(()=>Autore, (autor)=>autor.obras,{eager:true})
     @JoinColumn({name:'autor'})
-    autor:Autore;
+    autor:Relation<Autore>;
 
     @ManyToOne(()=>Region, (region)=>region.obras, {eager:true})
     @JoinColumn({name:'region'})
@@ -51,5 +55,7 @@ export class Obra {
 
     @ManyToOne(()=>Usuario, (usuario)=>usuario.obraCreados,{eager:true})
     @JoinColumn({name:'usuario_creador'})
-    usuario: Usuario;
+    usuario: Relation<Usuario>;
+    // @ManyToOne(()=>Usuario)
+    // usuario:Usuario
 }

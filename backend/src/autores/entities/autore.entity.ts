@@ -1,4 +1,4 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Obra } from "../../obras/entities/obra.entity.js";
 @Entity('autor')
 export class Autore {
@@ -14,6 +14,9 @@ export class Autore {
     @Column({type:'enum', enum:['autor', 'recopilador', 'anonimo']})
     tipo:string;
 
-    @OneToMany(()=>Obra,(obra)=>obra.autor)
+    @DeleteDateColumn()
+    eliminado_en:Date;
+
+    @OneToMany(() => Obra,(obra) => obra.autor)
     obras:Obra[];
 }

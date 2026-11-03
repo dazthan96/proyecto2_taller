@@ -1,10 +1,10 @@
 import { Injectable, OnApplicationBootstrap } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Departamento } from "../obras/entities/departamento.entity.js";
+import { Departamento } from "../entidades/departamento.entity.js";
 import { Repository } from "typeorm";
-import { Region } from "../obras/entities/region.entity.js";
-import { Categoria } from "../obras/entities/categoria.entity.js";
-import { Cultura } from "../obras/entities/cultura.entity.js";
+import { Region } from "../entidades/region.entity.js";
+import { Categoria } from "../entidades/categoria.entity.js";
+import { Cultura } from "../entidades/cultura.entity.js";
 
 @Injectable()
 export class SeederService implements OnApplicationBootstrap{

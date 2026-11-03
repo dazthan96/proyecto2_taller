@@ -1,10 +1,10 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Obra } from "./obra.entity.js";
+import { Obra } from "../obras/entities/obra.entity.js";
 
 @Entity('categoria')
 export class Categoria{
     @PrimaryGeneratedColumn()
-    id:string;
+    id:number;
 
     @Column({unique:true})
     nombre:string;
