@@ -10,10 +10,16 @@ import { Departamento } from './entidades/departamento.entity.js';
 import { Region } from './entidades/region.entity.js';
 import { Categoria } from './entidades/categoria.entity.js';
 import { Cultura } from './entidades/cultura.entity.js';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [ConfigModule.forRoot({
     isGlobal:true,
+  }),
+  ServeStaticModule.forRoot({
+    rootPath: join(process.cwd(),'src','upload'),
+    serveRoot:'/upload'
   }),
   TypeOrmModule.forRootAsync({
     imports:[ConfigModule],

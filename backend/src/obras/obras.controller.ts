@@ -17,7 +17,7 @@ export class ObrasController {
   @UseInterceptors(
     FileInterceptor('file',{
       storage:diskStorage({
-        destination:'./upload',
+        destination:'./src/upload',
         filename:(req, file, callback)=>{
           const uniqueSuffix = Date.now() + '-' + Math.round(Math.random()*1e9);
           callback(null,`obra-${uniqueSuffix}${extname(file.originalname)}` )

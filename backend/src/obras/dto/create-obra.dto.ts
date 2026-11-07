@@ -39,4 +39,6 @@ export class CreateObraDto {
     @IsString()
     @IsNotEmpty()
     usuario:string;
+    @IsOptional()
+    file:any
 }

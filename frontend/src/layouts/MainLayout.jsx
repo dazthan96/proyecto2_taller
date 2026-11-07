@@ -13,12 +13,12 @@ export function MainLayout(){
     }
 
     function irAutores(){
-        navegar("/Autores")
+        navegar("/buscar")
         setMenuLateral(false)
     }
 
     function irObras(){
-        navegar("/Obras")
+        navegar("/nuevaobra")
         setMenuLateral(false)
     }
 
