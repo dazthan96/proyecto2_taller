@@ -10,7 +10,30 @@ export function Login(){
     const [cargando, setCargando] = useState(false);
     const [errorMensaje, setErrorMensaje] = useState('');
     const {loginState} = useContext(AuthContext);
+
+    const ingresarComoVisitante = async (evento) => {
+    evento.preventDefault();
+    setErrorMensaje(null);
+    setCargando(true);
     
+    try {
+        const respuesta = await api.post('/auth/login', {
+        id: 1111111, 
+        contrasena: '123456'
+        });
+
+        const { access_token, ...datosUsuario } = respuesta.data;
+        loginState(datosUsuario, access_token);
+        
+        alert('¡Bienvenido al sistema!');
+    } catch (error) {
+        const mensaje = error.response?.data?.message || 'Error al conectar con el servidor';
+        setErrorMensaje(mensaje);
+    } finally {
+        setCargando(false);
+    }
+    };
+
     async function alEnviarFormulario(evento){
         evento.preventDefault();
         setErrorMensaje(null)
@@ -35,6 +58,7 @@ export function Login(){
         <AuthLayoutComponent>
             <Container maxWidth='xs'>
                 <Box 
+                    
                     sx={{
                         marginTop:8,
                         display:'flex',
@@ -44,6 +68,7 @@ export function Login(){
                         padding:3,
                         borderRadius:2,
                         backgroundColor:'background.paper'
+                        
                     }}>
                         <Typography component='h4' variant="h5" sx={{marginBottom:2, fontWeight:'bold'}}>
                             Ingresar
@@ -57,6 +82,7 @@ export function Login(){
                                 label="Carnet de id"
                                 autoFocus
                                 value={username}
+                                sx={{ marginY:1}}
                                 onChange={function(e) {setUsername(e.target.value)}}
                             />
                             <TextField
@@ -66,6 +92,7 @@ export function Login(){
                                 label="Contraseña"
                                 type="password"
                                 value={contrasenia}
+                                sx={{ marginY:1}}
                                 onChange={function (e) {setContrasenia(e.target.value)}}
                             />
                             <Button
@@ -74,11 +101,26 @@ export function Login(){
                                 variant="contained"
                                 color="primary"
                                 disabled={cargando}
-                                sx={{ paddingY:1.5}}
+                                sx={{ paddingY:1.5, marginY:1}}
                                 >
                                 {cargando ? 'verificando':'Ingresar al sistema'}
 
                             </Button>
+                            <Button 
+                            type="button"
+                                variant="outlined" 
+                                color="secondary" 
+                                fullWidth 
+                                size="large"
+                                onClick={ingresarComoVisitante}
+                                sx={{ 
+                                    textTransform: 'none', 
+                                    fontWeight: 'bold',
+                                    borderWidth: 2,
+                                    '&:hover': { borderWidth: 2 },
+                                    marginY:1
+                                }}
+                                >Ingresar como Visitante</Button>
                         </Box>
 
                 </Box>

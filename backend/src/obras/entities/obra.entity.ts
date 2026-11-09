@@ -33,27 +33,27 @@ export class Obra {
     @DeleteDateColumn()
     eliminado_en:Date
 
-    @ManyToOne(()=>Departamento, (departamento)=>departamento.obras, {eager:true})
+    @ManyToOne(()=>Departamento, (departamento)=>departamento.obras, {eager:false})
     @JoinColumn({name: 'departamento_id'})
     departamento:Departamento;
 
-    @ManyToOne(()=>Autore, (autor)=>autor.obras,{eager:true})
+    @ManyToOne(()=>Autore, (autor)=>autor.obras,{eager:false})
     @JoinColumn({name:'autor'})
     autor:Relation<Autore>;
 
-    @ManyToOne(()=>Region, (region)=>region.obras, {eager:true})
+    @ManyToOne(()=>Region, (region)=>region.obras, {eager:false})
     @JoinColumn({name:'region'})
     region:Region;
 
-    @ManyToOne(()=>Cultura, (cultura)=>cultura.obras, {eager:true})
+    @ManyToOne(()=>Cultura, (cultura)=>cultura.obras, {eager:false})
     @JoinColumn({name:'cultura'})
     cultura:Cultura; 
 
-    @ManyToOne(()=>Categoria, (categoria)=>categoria.obras,{eager:true})
+    @ManyToOne(()=>Categoria, (categoria)=>categoria.obras,{eager:false})
     @JoinColumn({name:'categoria'})
     categoria: Categoria;
 
-    @ManyToOne(()=>Usuario, (usuario)=>usuario.obraCreados,{eager:true})
+    @ManyToOne(()=>Usuario, (usuario)=>usuario.obraCreados,{eager:false})
     @JoinColumn({name:'usuario_creador'})
     usuario: Relation<Usuario>;
     // @ManyToOne(()=>Usuario)

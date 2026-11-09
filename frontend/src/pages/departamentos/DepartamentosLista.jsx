@@ -18,7 +18,7 @@ export default function DepartamentoListaPantalla() {
   return (
     <Grid container spacing={3}>
       {departamentos.map((departamento) => (
-        <Grid item xs={12} sm={6} md={4} key={departamento.id}>
+        <Grid size={{xs:12, sm:6, md:4}} key={departamento.id}>
           <Card sx={{ boxShadow: 2 }}>
             <CardActionArea onClick={() => navigate(`/buscar/departamento/${departamento.id}`)}>
 

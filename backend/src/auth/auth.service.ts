@@ -39,6 +39,7 @@ export class AuthService {
       id:usuarioEncontrado.id,
       nombre: usuarioEncontrado.nombre_completo,
       rol:usuarioEncontrado.rol,
+      correo:usuarioEncontrado.correo,
       access_token:tokenGenerado,
       message: "Acceso concedio al sistema"
     }

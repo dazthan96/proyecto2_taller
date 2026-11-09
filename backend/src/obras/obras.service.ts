@@ -75,7 +75,16 @@ export class ObrasService {
   async findByCategory(id:number){
     return await this.obraRepo.find({
       where:{categoria:{id:id}},
-      relations:{categoria:true}
+      relations:{departamento:true, categoria:true, cultura:true,region:true, autor:true},
+      select:{
+          id:true,titulo:true, sinopsis:true, url_pdf:true, anio_publicacion:true, descargas:true, creado_en:true,
+          departamento:{nombre:true},
+          autor:{nombre_completo:true},
+          categoria:{nombre:true},
+          cultura:{nombre:true},
+          region:{nombre:true},
+          usuario:{nombre_completo:true}
+        }
     })
   }
 
@@ -84,7 +93,17 @@ export class ObrasService {
   }
   async findByDepto(id:number){
     return await this.obraRepo.find({
-      where:{departamento:{id:id}}
+      where:{departamento:{id:id}},
+      relations:{departamento:true, categoria:true, cultura:true,region:true, autor:true},
+      select:{
+          id:true,titulo:true, sinopsis:true, url_pdf:true, anio_publicacion:true, descargas:true, creado_en:true,
+          departamento:{nombre:true},
+          autor:{nombre_completo:true},
+          categoria:{nombre:true},
+          cultura:{nombre:true},
+          region:{nombre:true},
+          usuario:{nombre_completo:true}
+        }
     })
   }
 
@@ -93,7 +112,17 @@ export class ObrasService {
   }
   async findByCulture(id:number){
     return await this.obraRepo.find({
-      where:{cultura:{id:id}}
+      where:{cultura:{id:id}},
+      relations:{departamento:true, categoria:true, cultura:true,region:true, autor:true},
+      select:{
+          id:true,titulo:true, sinopsis:true, url_pdf:true, anio_publicacion:true, descargas:true, creado_en:true,
+          departamento:{nombre:true},
+          autor:{nombre_completo:true},
+          categoria:{nombre:true},
+          cultura:{nombre:true},
+          region:{nombre:true},
+          usuario:{nombre_completo:true}
+        }
     })
   }
 
@@ -103,7 +132,17 @@ export class ObrasService {
   
   async findByRegion(id:number){
     return await this.obraRepo.find({
-      where:{region:{id:id}}
+      where:{region:{id:id}},
+      relations:{departamento:true, categoria:true, cultura:true,region:true, autor:true},
+      select:{
+          id:true,titulo:true, sinopsis:true, url_pdf:true, anio_publicacion:true, descargas:true, creado_en:true,
+          departamento:{nombre:true},
+          autor:{nombre_completo:true},
+          categoria:{nombre:true},
+          cultura:{nombre:true},
+          region:{nombre:true},
+          usuario:{nombre_completo:true}
+        }
     })
   }
   async registrarDescarga(id:number){
@@ -114,4 +153,17 @@ export class ObrasService {
     await this.obraRepo.save(obra)
     return obra.titulo;
   }
+
+async obtenerEstadisticasPor(criterio: 'autor' | 'region' | 'departamento' | 'categoria' | 'cultura') {
+  const columnaNombre = criterio === 'autor' ? 'nombre_completo' : 'nombre';
+
+  return await this.obraRepo.createQueryBuilder('obra')
+    .innerJoin(`obra.${criterio}`, 'criterio')
+    .select(`criterio.${columnaNombre}`, 'name') 
+    .addSelect('SUM(obra.descargas)', 'value')
+    .groupBy('criterio.id')
+    .addGroupBy(`criterio.${columnaNombre}`)
+    .getRawMany(); 
+}
+
 }

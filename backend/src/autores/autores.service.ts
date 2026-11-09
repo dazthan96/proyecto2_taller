@@ -22,7 +22,14 @@ export class AutoresService {
 
   async findOne(id: number) {
     const autor = await this.autorRepo.findOne({
-      where:{id:id}
+      where:{id:id},
+      relations:{obras:true},
+      select:{
+        id:true, nombre_completo:true, biografia:true,tipo:true,
+        obras:{
+          id:true,titulo:true, sinopsis:true, url_pdf:true, anio_publicacion:true, descargas:true, creado_en:true
+        }
+      }
     })
     if(!autor){throw new NotFoundException("El autor no existe")}
     return autor;

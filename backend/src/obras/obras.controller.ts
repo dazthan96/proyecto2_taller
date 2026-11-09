@@ -39,6 +39,12 @@ export class ObrasController {
       obra: obraGuardada
     };
   }
+
+  @Get('estadisticas/:criterio')
+    async consultarEstadisticas(@Param('criterio') criterio: string) {
+      return await this.obrasService.obtenerEstadisticasPor(criterio as any);
+    }
+
   //LISTAR POR TABLA
   @Get('categoria/lista')
   findAllCategories(){

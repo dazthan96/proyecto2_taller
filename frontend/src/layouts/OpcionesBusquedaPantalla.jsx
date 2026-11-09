@@ -7,9 +7,9 @@ export default function OpcionesBusquedaPantalla() {
   return (
     <Grid container spacing={3} sx={{justifyContent:'center'}} >
       {/* Tarjeta de Autores */}
-      <Grid item xs={12} sm={6} md={4}>
+      <Grid size={{xs:12, sm:6, md:4}}>
         <Card sx={{ boxShadow: 3 }}>
-          <CardActionArea onClick={() => navigate('/buscar/autore')}>
+          <CardActionArea onClick={() => navigate('/buscar/autor')}>
             <CardContent sx={{ textAlign: 'center', py: 4 }}>
               <Typography variant="h5">Autores</Typography>
             </CardContent>
@@ -18,7 +18,7 @@ export default function OpcionesBusquedaPantalla() {
       </Grid>
 
       {/* Tarjeta de Departamentos (Molde para cuando la crees) */}
-      <Grid item xs={12} sm={6} md={4}>
+      <Grid size={{xs:12, sm:6, md:4}}>
         <Card sx={{ boxShadow: 3 }}>
           <CardActionArea onClick={() => navigate('/buscar/departamento')}>
             <CardContent sx={{ textAlign: 'center', py: 4 }}>
@@ -28,7 +28,7 @@ export default function OpcionesBusquedaPantalla() {
         </Card>
       </Grid>
       {/* Tarjeta de Departamentos (Molde para cuando la crees) */}
-      <Grid item xs={12} sm={6} md={4}>
+      <Grid size={{xs:12, sm:6, md:4}}>
         <Card sx={{ boxShadow: 3 }}>
           <CardActionArea onClick={() => navigate('/buscar/categoria')}>
             <CardContent sx={{ textAlign: 'center', py: 4 }}>
@@ -38,7 +38,7 @@ export default function OpcionesBusquedaPantalla() {
         </Card>
       </Grid>
       {/* Tarjeta de Departamentos (Molde para cuando la crees) */}
-      <Grid item xs={12} sm={6} md={4}>
+      <Grid size={{xs:12, sm:6, md:4}}>
         <Card sx={{ boxShadow: 3 }}>
           <CardActionArea onClick={() => navigate('/buscar/region')}>
             <CardContent sx={{ textAlign: 'center', py: 4 }}>
@@ -48,7 +48,7 @@ export default function OpcionesBusquedaPantalla() {
         </Card>
       </Grid>
       {/* Tarjeta de Departamentos (Molde para cuando la crees) */}
-      <Grid item xs={12} sm={6} md={4}>
+      <Grid size={{xs:12, sm:6, md:4}}>
         <Card sx={{ boxShadow: 3 }}>
           <CardActionArea onClick={() => navigate('/buscar/cultura')}>
             <CardContent sx={{ textAlign: 'center', py: 4 }}>
