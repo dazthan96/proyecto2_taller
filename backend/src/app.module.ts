@@ -31,7 +31,7 @@ import { join } from 'path';
         password:config.get('DB_PASSWORD'),
         database:config.get('DB_DATABASE'),
         autoLoadEntities:true,
-        //synchronize:true,
+        synchronize:true,
         //logging:true
     }),
     inject:[ConfigService]
