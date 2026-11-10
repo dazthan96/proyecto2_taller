@@ -32,7 +32,7 @@ interface ApiService {
 
 object RetrofitClient {
     // 💡 AQUÍ COLOCAS TU IP ASIGNADA POR TAILSCALE (Ej: "100.80.90.100")
-    private const val BASE_URL = "http://100.71.241.12:3000/"
+    private const val BASE_URL = "http://100.104.224.61:3000/"
 
     val apiService: ApiService by lazy {
         Retrofit.Builder()
